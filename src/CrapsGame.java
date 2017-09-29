@@ -20,7 +20,7 @@ public class CrapsGame
 		dice = new Dice(die1, die2);
 	}
 
-	public boolean playNumberOfGame(int[] wins, int[] losses)
+	public boolean playOneGame(int[] wins, int[] losses)
 	{
 		int steps = 1;
 
@@ -37,13 +37,16 @@ public class CrapsGame
 		{
 			return winForPlayer(wins, steps);
 		}
-		else if (point==2 || point == 3 || point==12)
-		{
-			return lossForPlayer(losses, steps);
-		}
-
+		
 		// Else if point is 2, 3, or 12, announce an immediate loss for player,
 		// increment losses[steps], and return false indicating loss
+		
+		else if (point==2 || point == 3 || point==12)
+		{
+			println("Loss for player with " + point);
+			losses[steps] = losses[steps] + 1;
+			return false;
+		}
 
 		// If not an immediate win nor loss, print out point
 		// roll the dice over and over, keeping track of steps,
@@ -67,7 +70,7 @@ public class CrapsGame
 				value = dice.getLastRoll();
 				println("Next roll is: " + value);
 			}
-			while (value != 7 && value != point);
+			while (gameIsNotOver(value));
 	
 			// the following is equivalent to the above.
 			// Is it easier to understand?
@@ -101,6 +104,11 @@ public class CrapsGame
 		}
 
 		return false;
+	}
+
+	private boolean gameIsNotOver(int value)
+	{
+		return value != 7 && value != point;
 	}
 
 	private boolean lossForPlayer(int[] losses, int steps)
