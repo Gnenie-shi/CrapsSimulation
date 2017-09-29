@@ -34,7 +34,7 @@ public class CrapsSimulation
 	 * Field <code>numWins</code> tracks the total number of wins out of
 	 * <code>numPlays</code> total plays.
 	 */
-	private int numberOfWinsSoFar;
+	private int numberOfWins;
 
 	/**
 	 * Field <code>numPlays</code> counts the total number of individual games
@@ -84,12 +84,12 @@ public class CrapsSimulation
 	public void play(int n)
 	{
 		numberOfPlays = n;
-		numberOfWinsSoFar = 0;
+		numberOfWins = 0;
 		for (int i = 0; i < numberOfPlays; i++)
 		{
 			if (game.playNumberOfGame(winForNumberOfStepsOf, lossSteps))
 			{
-				numberOfWinsSoFar++;
+				numberOfWins++;
 			}
 		}
 	}
@@ -114,7 +114,7 @@ public class CrapsSimulation
 		
 		StdOut.println("\nPlayed " + numberOfPlays + " games total.");
 		
-		StdOut.println("Won " + numberOfWinsSoFar + "/" + numberOfPlays + "==" + 100.0 * (0.0 + numberOfWinsSoFar) / numberOfPlays + "%");
+		StdOut.println("Won " + numberOfWins + "/" + numberOfPlays + "==" + 100.0 * (0.0 + numberOfWins) / numberOfPlays + "%");
 
 	}
 
